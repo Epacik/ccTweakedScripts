@@ -1,0 +1,8 @@
+{
+    "Lua.diagnostics.globals": [
+        "homingSequence",
+        "turtle",
+        "doAThing",
+        "CanIPlant"
+    ]
+}
