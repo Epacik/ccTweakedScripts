@@ -1,5 +1,9 @@
 
 
+local function timer(sec)
+    _G.sleep(sec)
+end
+
 local function Collect()
     while turtle.forward() do
         local x, item = turtle.inspectUp();
@@ -44,6 +48,12 @@ local function leaveRestOfItems()
     turtle.turnLeft();
 end
 
-Collect();
-LeaveSeeds();
-leaveRestOfItems();
+while true do
+    timer(10);
+    if (redstone.getInput("back")) then
+        Collect();
+        LeaveSeeds();
+        leaveRestOfItems();
+    end
+end
+

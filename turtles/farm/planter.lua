@@ -9,6 +9,11 @@ local Tasks = {
 
 local Task = Tasks.Planting;
 
+local function timer(sec)
+_G.sleep(sec)
+end
+
+
 local function CanIPlant()
     local canIPlant = turtle.inspectDown()
     local isMiddle = turtle.inspectUp()
@@ -40,15 +45,25 @@ local function Plant()
 
 end
 
-local function DoAThing()
-    
+local StatesAmount = 0;
+local States = {}
 
+local function Check()
+    local x, item = turtle.inspectDown();
+    if(x and item.name == "minecraft:wheat") then
+        StatesAmount = StatesAmount + 1;
+        States[StatesAmount] = item.state.age;
+    end
+end
+
+local function DoAThing()
     if Task == Tasks.Planting and CanIPlant() then
         print("planting")
         Plant();
         
     elseif Task == Tasks.Checking then
-        print ("checking")
+        print ("checking");
+        Check();
     end
 end
 
@@ -58,7 +73,7 @@ local function CheckIfEnd()
         print("found end block");
         return true;
     else
-        print("found end block")
+        print("didn't found end block")
         return false;
     end
 
@@ -187,4 +202,52 @@ local function HomingSequence()
     end
 end
 
-HomingSequence()
+local function CalculateGrowth()
+    if StatesAmount == 0 then
+        return 0;
+    end
+    local overallGrowth = 0;
+    for i = 1, StatesAmount, 1 do
+        overallGrowth = overallGrowth + States[i];
+    end
+    print("overall field growth")
+    print(overallGrowth / StatesAmount)
+    return overallGrowth / StatesAmount;
+end
+
+local function MainLoop()
+    
+
+    while true do
+        States = {};
+        StatesAmount = 0;
+
+        Task = Tasks.Checking;
+        HomingSequence();
+        if CalculateGrowth() > 6.5 then
+            redstone.setOutput("top", true);
+            timer(5)
+            redstone.setOutput("top", false);
+
+            local stacksInInv = 0;
+            for i = 1, 16, 1 do
+                turtle.select(i);
+                local item = turtle.getItemDetail();
+                if(item ~= nil and item["name"] == "minecraft:wheat_seeds") then
+                    stacksInInv = stacksInInv + 1;
+                end
+            end
+            if stacksInInv < 16 then
+                for i = 1, 16 - stacksInInv , 1 do
+                    turtle.suckDown()
+                end
+            end
+
+            Task = Tasks.Planting;
+            HomingSequence();
+        end
+        timer(60)
+    end
+end
+
+MainLoop();
