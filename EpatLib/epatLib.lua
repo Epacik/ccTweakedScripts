@@ -1,4 +1,4 @@
-local TurtleLib = require("./turtleLib.src")
+local TurtleLib = require("epatLib-turtle")
 
 function string:split(sep)
     local sep, fields = sep or ":", {}
