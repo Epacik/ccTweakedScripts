@@ -20,7 +20,7 @@ name = epatLib-turtle
 	size = 2672
 end
 
-name = epatFarmCollector
+name = epat-farm-collector
 	type = raw
 		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/turtles/farm/collecter.lua
 		filename = farmCollect
@@ -31,7 +31,7 @@ name = epatFarmCollector
 	size = 2672
 end
 
-name = epatFarmPlanter
+name = epat-farm-planter
 	type = raw
 		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/turtles/farm/planter.lua
 		filename = farmPlant
