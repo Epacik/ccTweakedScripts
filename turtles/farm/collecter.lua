@@ -49,11 +49,9 @@ local function leaveRestOfItems()
 end
 
 trt.SetMainLoopCallback(function ()
-    timer(5);
-    if (redstone.getInput("back")) then
-        Collect();
-        LeaveSeeds();
-        leaveRestOfItems();
-    end
+    timer(60);
+    Collect();
+    LeaveSeeds();
+    leaveRestOfItems();
 end)
 
