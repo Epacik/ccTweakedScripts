@@ -27,7 +27,7 @@ name = epat-farm-collector
 	category = turtle api
 	dependencies = epat/epatLib-turtle
 	target = /usr/bin
-	version = 0.5
+	version = 0.6
 	size = 2673
 end
 
