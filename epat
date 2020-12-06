@@ -16,6 +16,6 @@ name = epatLib-turtle
 	category = turtle api
 	dependencies = none
 	target = /usr/apis
-	version = 0.1
+	version = 0.2
 	size = 2672
 end

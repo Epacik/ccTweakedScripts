@@ -5,7 +5,8 @@ local TurtleFuels = {
     "mekanism:block_charcoal",
 }
 local function Refuel()
-    if turtle.getFuelLevel() < 20 then
+    local fl = turtle.getFuelLevel();
+    if fl < 20 then
         local coalAvailable = false;
         local coalId = 1;
         for i = 1, 16, 1 do
@@ -27,17 +28,83 @@ local function Refuel()
 
         if( coalAvailable) then
             turtle.select(coalId)
-            turtle.refuel()
+            turtle.refuel(1)
             turtle.select(1)
         else
+
             --goBackAndLowFuelAlarm()
         end
+    elseif fl == 0 then
+        local coalAvailable = false;
+        local coalId = 0;
+        local showMsg = true;
+        while true do
+            for i = 1, 16, 1 do
+                turtle.select(i)
+                local item = turtle.getItemDetail()
+
+                if (item ~= nil) then
+                    if(
+                        item["name"] == "minecraft:coal" or
+                        item["name"] == "minecraft:coal_block" or
+                        item["name"] == "minecraft:charcoal" or
+                        item["name"] == "mekanism:block_charcoal" ) then
+                            coalAvailable = true;
+                            coalId = i;
+                            break;
+                        end
+                end
+            end
+            if coalAvailable then 
+                break;
+            elseif showMsg then
+                print("Add fuel to continue")
+                showMsg = true;
+            end
+        end
+
+        if(coalAvailable) then
+            turtle.select(coalId)
+            turtle.refuel(1)
+            turtle.select(1)
+        end
     end
+
 end
-
-
 
 function Main()
     Refuel();
 end
 
+function SetMainLoopCallback(callback)
+    if(type(callback) == "function") then mcb = callback end
+end
+
+function SetBreakCallback(callback)
+    if(type(callback) == "function") then brkClbc = callback end
+end
+
+
+local mcb = function() end
+local brkClbc = function() return false end
+
+
+
+
+
+local function MainLoop()
+    while true do
+        if (type(turtle) ~= "nil") then
+           Refuel();
+        end
+    
+        mcb()
+
+
+        if brkClbc() then
+            break;
+        end
+    end
+end
+
+MainLoop();
