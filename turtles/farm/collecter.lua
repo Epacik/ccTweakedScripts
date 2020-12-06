@@ -1,4 +1,4 @@
-
+local trt = require("usr.apis.epatLib-turtle")
 
 local function timer(sec)
     _G.sleep(sec)
@@ -48,12 +48,12 @@ local function leaveRestOfItems()
     turtle.turnLeft();
 end
 
-while true do
-    timer(10);
+trt.SetMainLoopCallback(function ()
+    timer(5);
     if (redstone.getInput("back")) then
         Collect();
         LeaveSeeds();
         leaveRestOfItems();
     end
-end
+end)
 

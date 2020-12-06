@@ -19,3 +19,25 @@ name = epatLib-turtle
 	version = 0.2
 	size = 2672
 end
+
+name = epatFarmCollector
+	type = raw
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/turtles/farm/collecter.lua
+		filename = farmCollect
+	category = turtle api
+	dependencies = none
+	target = /usr/bin
+	version = 0.2
+	size = 2672
+end
+
+name = epatFarmPlanter
+	type = raw
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/turtles/farm/planter.lua
+		filename = farmPlant
+	category = turtle api
+	dependencies = none
+	target = /usr/bin
+	version = 0.2
+	size = 2672
+end
