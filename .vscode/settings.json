@@ -4,6 +4,8 @@
         "turtle",
         "doAThing",
         "CanIPlant",
-        "redstone"
+        "redstone",
+        "fs",
+        "shell"
     ]
 }

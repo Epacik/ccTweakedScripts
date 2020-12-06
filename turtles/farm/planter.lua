@@ -204,7 +204,7 @@ end
 
 local function CalculateGrowth()
     if StatesAmount == 0 then
-        return 0;
+        return 7;
     end
     local overallGrowth = 0;
     for i = 1, StatesAmount, 1 do
