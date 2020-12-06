@@ -1,0 +1,21 @@
+name = epatLib
+	type = raw
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/EpatLib/epatLib.lua
+		filename = epatLib
+	category = api
+	dependencies = epat/epatLib-turtle
+	target = /usr/apis
+	version = 0.1
+	size = 2671
+end
+
+name = epatLib-turtle
+	type = raw
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/EpatLib/epatLib-turtle.lua
+		filename = epatLib-turtle
+	category = turtle api
+	dependencies = none
+	target = /usr/apis
+	version = 0.1
+	size = 2671
+end
