@@ -80,7 +80,7 @@ end
 
 
 local mcb = function() end
-local brkClbc = nil
+local brkClbc 
 
 
 function SetMainLoopCallback(callback)
@@ -104,7 +104,7 @@ local function MainLoop()
         os.pullEvent()
 
 
-        if  brkClbc() then
+        if brkClbc ~= nil and brkClbc() then
             break;
         end
     end
