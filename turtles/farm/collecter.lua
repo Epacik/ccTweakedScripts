@@ -56,3 +56,5 @@ trt.SetMainLoopCallback(function ()
     leaveRestOfItems();
 end)
 
+trt.Run()
+

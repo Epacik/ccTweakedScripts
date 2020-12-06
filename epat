@@ -5,7 +5,7 @@ name = epatLib
 	category = api
 	dependencies = epat/epatLib-turtle
 	target = /usr/apis
-	version = 0.3
+	version = 0.4
 	size = 2672
 end
 
@@ -27,7 +27,7 @@ name = epat-farm-collector
 	category = turtle api
 	dependencies = epat/epatLib-turtle
 	target = /usr/bin
-	version = 0.4
+	version = 0.5
 	size = 2673
 end
 

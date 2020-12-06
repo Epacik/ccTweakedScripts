@@ -76,6 +76,13 @@ function Main()
     Refuel();
 end
 
+
+
+
+local mcb = function() end
+local brkClbc = nil
+
+
 function SetMainLoopCallback(callback)
     if(type(callback) == "function") then mcb = callback end
 end
@@ -83,13 +90,6 @@ end
 function SetBreakCallback(callback)
     if(type(callback) == "function") then brkClbc = callback end
 end
-
-
-local mcb = function() end
-local brkClbc = function() return false end
-
-
-
 
 
 local function MainLoop()
@@ -100,11 +100,16 @@ local function MainLoop()
     
         mcb()
 
+        os.queueEvent("randomEvent")
+        os.pullEvent()
 
-        if brkClbc() then
+
+        if  brkClbc() then
             break;
         end
     end
 end
 
-MainLoop();
+function Run()
+    MainLoop();
+end
