@@ -1,5 +1,5 @@
-package.path = package.path .. ";../"
-local trt = require("apis.epatLib-turtle")
+os.loadAPI("/usr/apis/epatLibTurtle")
+local trt = epatLibTurtle
 
 local function timer(sec)
     _G.sleep(sec)

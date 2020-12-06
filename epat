@@ -12,7 +12,7 @@ end
 name = epatLib-turtle
 	type = raw
 		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/EpatLib/epatLib-turtle.lua
-		filename = epatLib-turtle
+		filename = epatLibTurtle
 	category = turtle api
 	dependencies = none
 	target = /usr/apis
