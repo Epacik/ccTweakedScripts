@@ -1,3 +1,6 @@
+os.loadAPI("/usr/apis/epatLibTurtle")
+local trt = epatLibTurtle
+
 local EndBlockName = "minecraft:smooth_stone"
 local CannotPlantBlockName = "minecraft:cobblestone"
 local StartBlock = "mekanism:block_osmium"
@@ -215,39 +218,97 @@ local function CalculateGrowth()
     return overallGrowth / StatesAmount;
 end
 
-local function MainLoop()
-    
+local function IsHomePos()
+    local x, item = turtle.inspectUp();
+    if not x or item.name ~= StartBlock then
+        return false
+    end
 
+    -- correct rotation
     while true do
-        States = {};
-        StatesAmount = 0;
-
-        Task = Tasks.Checking;
-        HomingSequence();
-        if CalculateGrowth() > 6.5 then
-            redstone.setOutput("top", true);
-            timer(5)
-            redstone.setOutput("top", false);
-
-            local stacksInInv = 0;
-            for i = 1, 16, 1 do
-                turtle.select(i);
-                local item = turtle.getItemDetail();
-                if(item ~= nil and item["name"] == "minecraft:wheat_seeds") then
-                    stacksInInv = stacksInInv + 1;
-                end
-            end
-            if stacksInInv < 16 then
-                for i = 1, 16 - stacksInInv , 1 do
-                    turtle.suckDown()
-                end
-            end
-
-            Task = Tasks.Planting;
-            HomingSequence();
+        turtle.turnLeft();
+        x, item = turtle.inspect();
+        if(x) then
+            break;
         end
-        timer(60)
+    end
+    turtle.turnRight();
+
+    return true;
+end
+
+local function GoBackHome()
+    local px, pitem = false, nil;
+    while not IsHomePos() do
+        turtle.forward();
+        local x, item = turtle.inspect();
+
+        if x and item.name == "minecraft:piston_head" then
+            turtle.turnLeft();
+            turtle.turnLeft();
+            turtle.forward();
+        elseif x and item.name == "minecraft:stone_bricks" then
+            turtle.turnLeft();
+        elseif x and item.name == CannotPlantBlockName then
+            turtle.turnLeft();
+        elseif x and item.name == "minecraft:stone" then
+            local x1, item1 = turtle.inspectUp();
+            if x1 then
+                turtle.turnLeft();
+                turtle.turnLeft();
+            else
+                turtle.turnLeft();
+            end
+        end
+        x, item = turtle.inspectUp();
+        if(x and not px) then
+            turtle.turnLeft();
+        end
+
+        px = x;
+        pitem = item;
+
+
     end
 end
 
-MainLoop();
+local function Main()
+    if not IsHomePos() then
+        GoBackHome();
+    end
+
+    States = {};
+    StatesAmount = 0;
+
+    Task = Tasks.Checking;
+    HomingSequence();
+    if CalculateGrowth() > 6.5 then
+        redstone.setOutput("top", true);
+        timer(5)
+        redstone.setOutput("top", false);
+
+        local stacksInInv = 0;
+        for i = 1, 16, 1 do
+            turtle.select(i);
+            local item = turtle.getItemDetail();
+            if(item ~= nil and item["name"] == "minecraft:wheat_seeds") then
+                stacksInInv = stacksInInv + 1;
+            end
+        end
+        if stacksInInv < 16 then
+            for i = 1, 16 - stacksInInv , 1 do
+                turtle.suckDown()
+            end
+        end
+
+        Task = Tasks.Planting;
+        HomingSequence();
+    end
+    timer(60)
+end
+
+trt.SetMainLoopCallback(function ()
+    Main()
+end)
+
+trt.Run()
