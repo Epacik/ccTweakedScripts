@@ -56,5 +56,25 @@ trt.SetMainLoopCallback(function ()
     leaveRestOfItems();
 end)
 
+local function AmImLost()
+    local exists, item = turtle.inspectDown();
+    if (not exists) then
+        while turtle.down() do end
+    end
+
+    exists, item = turtle.inspectDown();
+
+    if(exists and item.name == "minecraft:dirt") then
+        return
+    elseif (exists) then
+        while turtle.back() do end
+    end
+    turtle.turnLeft();
+    exists, item = turtle.inspect();
+    if(exists) then turtle.turnRight(); end
+end
+
+AmImLost()
+
 trt.Run()
 
