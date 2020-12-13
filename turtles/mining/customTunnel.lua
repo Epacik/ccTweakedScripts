@@ -71,6 +71,9 @@ local function Main()
         getFuelInfo = false;
     end
 
+    if( arg[4] ~= nil and arg[4] == "--placeBlocks") then 
+        turtle.placeDown();
+    end
 
     for h = 1, height, 1 do
         DigRow();
