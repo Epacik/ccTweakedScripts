@@ -49,6 +49,6 @@ name = epat-custom-tunnel
 	category = turtle mining
 	dependencies = epat/epatLib-turtle
 	target = /usr/bin
-	version = 0.2
-	size = 2672
+	version = 0.3
+	size = 2673
 end

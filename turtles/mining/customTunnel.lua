@@ -22,12 +22,14 @@ local function DigRow()
     while turtle.dig() do end
 
     turtle.turnLeft();
+    
 
 end
 
 local function Main()
 
     for h = 1, height, 1 do
+        while turtle.digUp() do end
         DigRow();
     end
 
@@ -35,16 +37,20 @@ local function Main()
         turtle.down();
     end
 
-    while turtle.dig() do end
-    turtle.forward();
+    
 
     depth = depth - 1;
+
+    if(depth >= 1) then 
+        while turtle.dig() do end
+        turtle.forward();
+    end
 end
 
 if(args[1] == "--help" or width == nil or height == nil or depth == nil) then 
         print("usages: ")
-        print("tunnel <width:number> <height:number> <depth:number>")
-        print("tunnel <width:number> <height:number> <depth:number> --placeBlocks")
+        print(shell.getRunningProgram() .. " <width:number> <height:number> <depth:number>")
+        print(shell.getRunningProgram() .. " <width:number> <height:number> <depth:number> --placeBlocks")
 else
     trt.SetMainLoopCallback(function ()
         Main();
