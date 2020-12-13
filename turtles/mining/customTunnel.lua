@@ -26,11 +26,25 @@ local function DigRow()
 
 end
 
+local getFuelInfo = false;
+
 local function Main()
+    if( turtle.getFuelLevel() == 0 and not getFuelInfo) then
+        print("Add fuel to continue");
+        getFuelInfo = true;
+        return;
+    elseif getFuelInfo and turtle.getFuelLevel() > 0 then
+        print("continuing")
+        getFuelInfo = false;
+    end
+
 
     for h = 1, height, 1 do
-        while turtle.digUp() do end
         DigRow();
+        if h < height then
+            while turtle.digUp() do end
+            turtle.up();
+        end
     end
 
     for h = 1, height, 1 do
