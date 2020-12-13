@@ -83,7 +83,7 @@ local function Main()
         end
     end
 
-    for h = 1, height, 1 do
+    for h = 1, height - 1, 1 do
         turtle.down();
     end
 
