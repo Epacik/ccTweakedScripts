@@ -12,14 +12,47 @@ local height = tonumber(args[2]);
 local depth = tonumber(args[3]);
 
 local function DigRow()
+    local left = 0;
+    local right = 0;
+    if width > 1 then
+        if math.fmod(width, 2) == 0 then
+            -- divisible by 2
+            left = width / 2;
+            right = (width / 2) - 1;
+        else
+            -- not divisible by 2
+            left = (width - 1) / 2;
+            right = (width - 1) / 2;
+        end
+    else 
+        return
+    end
+
+
     -- for now width is always 3
     turtle.turnLeft();
 
-    while turtle.dig() do end
+    for i = 1, left, 1 do
+        while turtle.dig() do end
+        turtle.forward();
+    end
+
+    for i = 1, left, 1 do
+        turtle.back()
+    end
+    
 
     turtle.turnRight();
     turtle.turnRight();
-    while turtle.dig() do end
+
+    for i = 1, right, 1 do
+        while turtle.dig() do end
+        turtle.forward();
+    end
+
+    for i = 1, right, 1 do
+        turtle.back()
+    end
 
     turtle.turnLeft();
     
@@ -61,7 +94,7 @@ local function Main()
     end
 end
 
-if(args[1] == "--help" or width == nil or height == nil or depth == nil) then 
+if(args[1] == "--help" or width == nil or width == 0 or height == nil or height == 0 or depth == nil or depth == 0) then 
         print("usages: ")
         print(shell.getRunningProgram() .. " <width:number> <height:number> <depth:number>")
         print(shell.getRunningProgram() .. " <width:number> <height:number> <depth:number> --placeBlocks")
