@@ -6,7 +6,7 @@ local TurtleFuels = {
 }
 local function Refuel()
     local fl = turtle.getFuelLevel();
-    if fl < 20 then
+    if type(fl) == "number" and fl < 20 then
         local coalAvailable = false;
         local coalId = 1;
         for i = 1, 16, 1 do
