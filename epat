@@ -5,8 +5,8 @@ name = epatLib
 	category = api
 	dependencies = epat/epatLib-turtle
 	target = /usr/apis
-	version = 0.4
-	size = 2672
+	version = 0.5
+	size = 2675
 end
 
 name = epatLib-turtle
