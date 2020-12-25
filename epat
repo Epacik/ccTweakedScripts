@@ -60,6 +60,6 @@ name = epat-bread-crafter
 	category = turtle farming crafting
 	dependencies = epat/epatLib-turtle
 	target = /usr/bin
-	version = 0.2.1
-	size = 21
+	version = 0.3
+	size = 2673
 end
