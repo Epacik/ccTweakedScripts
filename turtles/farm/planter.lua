@@ -237,45 +237,62 @@ local function IsHomePos()
     return true;
 end
 
-local function GoBackHome()
-    local px, pitem = false, nil;
-    while not IsHomePos() do
-        turtle.forward();
-        local x, item = turtle.inspect();
-
-        if x and item.name == "minecraft:piston_head" then
-            turtle.turnLeft();
-            turtle.turnLeft();
-            turtle.forward();
-        elseif x and item.name == "minecraft:stone_bricks" then
-            turtle.turnLeft();
-        elseif x and item.name == CannotPlantBlockName then
-            turtle.turnLeft();
-        elseif x and item.name == "minecraft:stone" then
-            local x1, item1 = turtle.inspectUp();
-            if x1 then
-                turtle.turnLeft();
-                turtle.turnLeft();
-            else
-                turtle.turnLeft();
+local function AmILost()
+    
+    if(not IsHomePos()) then 
+        local goBack1 = false;
+        local goBack2 = false;
+        while turtle.forward() do
+            if turtle.inspectUp() and  turtle.inspect() then
+                local x, y = turtle.inspect();
+                local x1, y1 = turtle.inspectUp();
+                if x and (y.name == "minecraft:piston_head" or  y.name == "minecraft:diorite") then
+                    goBack1 = true;
+                    break
+                elseif x and y.name == "minecraft:stone" then
+                    goBack2 = true;
+                    break;
+                elseif x1 and y1.name == StartBlock then
+                    turtle.turnLeft();
+                    turtle.turnLeft();
+                    return;
+                end
             end
         end
-        x, item = turtle.inspectUp();
-        if(x and not px) then
-            turtle.turnLeft();
+
+        local pistonLeft = false;
+        local pistonRight = false;
+        if(goBack1) then
+            turtle.turnRight();
+            pistonLeft = true;
+            while turtle.forward() do 
+            end
+
+            local x, y = turtle.inspectUp();
+            if(x and y.name == EndBlockName) then
+                turtle.turnLeft();
+
+                GoBack(Directions.Left)
+            else
+                turtle.turnLeft();
+
+                GoBack(Directions.Right)
+            end
+        elseif(goBack2) then
+            while turtle.back() do
+                local x1, y1 = turtle.inspectUp();
+                if x1 and y1.name == StartBlock then
+                    return;
+                end
+            end
+
         end
-
-        px = x;
-        pitem = item;
-
-
     end
+
 end
 
 local function Main()
-    if not IsHomePos() then
-        GoBackHome();
-    end
+    AmILost()
 
     States = {};
     StatesAmount = 0;
