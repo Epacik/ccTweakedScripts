@@ -52,3 +52,14 @@ name = epat-custom-tunnel
 	version = 0.7
 	size = 2677
 end
+
+name = epat-bread-crafter
+	type = raw
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/turtles/farm/breadCrafter.lua
+		filename = breadCrafter
+	category = turtle farming crafting
+	dependencies = epat/epatLib-turtle
+	target = /usr/bin
+	version = 0.1
+	size = 2671
+end
