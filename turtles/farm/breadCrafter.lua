@@ -79,6 +79,13 @@ trt.SetMainLoopCallback(function ()
         turtle.select(i)
         if( not turtle.transferTo(1) and not turtle.transferTo(2)) then
             turtle.transferTo(3)
+            
+        end
+        if(turtle.getItemCount > 0) then
+            if( not turtle.transferTo(1) and not turtle.transferTo(2)) then
+                turtle.transferTo(3)
+                
+            end
         end
     end
     local posCounts = {};
@@ -108,7 +115,7 @@ trt.SetMainLoopCallback(function ()
             turtle.transferTo(1, mss);
         end
     end
-    
+
     turtle.craft();
 
 
