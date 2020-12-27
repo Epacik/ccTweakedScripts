@@ -68,9 +68,9 @@ name = epat-gate-server
 	type = raw
 		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/turtles/gate/gateServer.lua
 		filename = gateServer
-	category = turtle farming crafting
-	dependencies = epat/epatLib-turtle
+	category = gate automation
+	dependencies = epat/epatLib
 	target = /usr/bin
-	version = 0.1
-	size = 2671
+	version = 0.2
+	size = 2672
 end
