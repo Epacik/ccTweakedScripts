@@ -63,3 +63,14 @@ name = epat-bread-crafter
 	version = 0.3
 	size = 2673
 end
+
+name = epat-gate-server
+	type = raw
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/turtles/gate/gateServer.lua
+		filename = gateServer
+	category = turtle farming crafting
+	dependencies = epat/epatLib-turtle
+	target = /usr/bin
+	version = 0.1
+	size = 2671
+end
