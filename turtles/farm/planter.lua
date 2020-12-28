@@ -299,7 +299,7 @@ local function Main()
 
     Task = Tasks.Checking;
     HomingSequence();
-    if CalculateGrowth() > 6.5 then
+    if CalculateGrowth() > 6.95 then
         redstone.setOutput("top", true);
         timer(5)
         redstone.setOutput("top", false);
