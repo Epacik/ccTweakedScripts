@@ -52,6 +52,14 @@ local function ConnectToNetwork()
     end
 end
 
+local function ResetRedstone()
+    local sides = {"top", "bottom", "front", "back", "left", "right" }
+
+    for i = 1, 6, 1 do
+        redstone.setOutput(sides[i], false);
+    end
+end
+
 local function SetupHost()
     local host = "epGateHost";
 
@@ -62,12 +70,49 @@ local function SetupHost()
     rednet.host("epGate", host)
 end
 
+
+local function containsId(IDs, id)
+    id = tonumber(id)
+    local contains = false;
+    local index = 1;
+    while true do
+        if(IDs[index] == nil) then
+            break;
+        end
+        contains = tonumber(IDs[index]) == id;
+        index = index + 1;
+    end
+
+    return contains
+end
+
+local GateOpened = false;
+
 elb.SetMainLoopCallback(function ()
     local sender, message, protocol = rednet.receive("gate");
     local conf = GetConfig();
+    if (containsId(conf.IDs, sender)) then
+
+        local mss = message:split(":")
+        if conf.pass == nil and mss[2] == "open" then
+            redstone.setOutput("back", true);
+            GateOpened = true;
+        elseif conf.pass == nil and mss[2] == "close" then
+            redstone.setOutput("back", false);
+            GateOpened = false;
+        elseif conf.pass ~= nil and conf.pass == mss[1] and mss[2] == "open" then
+            redstone.setOutput("back", true);
+            GateOpened = true;
+        elseif conf.pass ~= nil and conf.pass == mss[1] and mss[2] == "close" then
+            redstone.setOutput("back", false);
+            GateOpened = false;
+        end
+    end
 end)
 
 ConnectToNetwork();
+
+ResetRedstone();
 
 SetupHost();
 
