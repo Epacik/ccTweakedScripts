@@ -22,7 +22,7 @@ end
 
 name = sha1
 	type = raw
-		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/EpatLib/stringLib.lua
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/EpatLib/sha1.lua
 		filename = sha1
 	category = api
 	dependencies = none
