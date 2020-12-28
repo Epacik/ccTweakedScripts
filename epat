@@ -93,6 +93,6 @@ name = epat-gate-server
 	category = gate automation
 	dependencies = epat/epatLib epat/stringLib
 	target = /usr/bin
-	version = 0.5
-	size = 2675
+	version = 0.6
+	size = 2676
 end

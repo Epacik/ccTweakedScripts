@@ -117,7 +117,7 @@ local GateOpened = false;
 
 elb.SetMainLoopCallback(function ()
     print("waiting");
-    local sender, message, protocol = rednet.receive("gate");
+    local sender, message, protocol = rednet.receive("epGate");
     print("Got a message");
     local conf = GetConfig();
     if (containsId(conf.IDs, sender)) then
