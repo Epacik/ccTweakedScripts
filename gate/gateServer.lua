@@ -6,24 +6,26 @@ local args = {...};
 
 local function newConfig(lines, linesNumber)
     print("Parsing config");
+    print("lines count" .. tostring(linesNumber));
     local conf = {};
     for i = 1, linesNumber, 1 do
         print("parsing line: ");
         print(lines[i]);
 
-        if(lines[i]:startsWith("IDs")) then
-            local ids = lines[i]:split(":");
-            if(ids[2] ~= nil) then
-                print("ids");
-                print(ids[2]);
-                conf.IDs = ids[2]:split(";");
+        if(lines[i]  ~= nil) then
+            if(lines[i]:startsWith("IDs")) then
+                local ids = lines[i]:split(":");
+                if(ids[2] ~= nil) then
+                    print("ids");
+                    print(ids[2]);
+                    conf.IDs = ids[2]:split(";");
+                end
+            elseif (lines[i]:startsWith("pass")) then
+                print("pass");
+                print(lines[i]:split(":")[2]);
+                conf.pass = lines[i]:split(":")[2];
             end
-        elseif (lines[i]:startsWith("pass")) then
-            print("pass");
-            print(lines[i]:split(":")[2]);
-            conf.pass = lines[i]:split(":")[2];
         end
-
     end
 
     return conf;
@@ -139,6 +141,8 @@ elb.SetMainLoopCallback(function ()
             print("Closing");
             redstone.setOutput("back", false);
             GateOpened = false;
+        elseif conf.pass ~= nil and conf.pass ~= mss[1] then
+            print("wrong password");
         end
     end
 end)

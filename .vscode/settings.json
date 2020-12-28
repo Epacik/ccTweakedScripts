@@ -9,6 +9,8 @@
         "shell",
         "epatLibTurtle",
         "rednet",
-        "peripheral"
+        "peripheral",
+        "read",
+        "settings"
     ]
 }

@@ -93,6 +93,17 @@ name = epat-gate-server
 	category = gate automation
 	dependencies = epat/epatLib epat/stringLib
 	target = /usr/bin
-	version = 0.6
-	size = 2676
+	version = 0.8
+	size = 2678
+end
+
+name = epat-gate-client
+	type = raw
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/gate/gateClient.lua
+		filename = gateClient
+	category = gate automation
+	dependencies = epat/stringLib epat/sha1
+	target = /usr/bin
+	version = 0.1
+	size = 2671
 end
