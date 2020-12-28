@@ -5,7 +5,21 @@ name = epatLib
 	category = api
 	dependencies = epat/epatLib-turtle
 	target = /usr/apis
-	version = 0.5
+	version = 0.6
+	size = 2675
+end
+
+name = stringLib
+	type = raw
+		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/EpatLib/stringLib.lua
+		filename = stringLib
+	category = api
+	dependencies = none
+	target = /usr/apis
+	version = 0.6
+	size = 2675
+end
+
 name = sha1
 	type = raw
 		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/EpatLib/stringLib.lua
@@ -77,7 +91,7 @@ name = epat-gate-server
 		url = https://raw.githubusercontent.com/Epacik/ccTweakedScripts/main/gate/gateServer.lua
 		filename = gateServer
 	category = gate automation
-	dependencies = epat/epatLib
+	dependencies = epat/epatLib epat/stringLib
 	target = /usr/bin
 	version = 0.3
 	size = 2673

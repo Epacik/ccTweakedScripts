@@ -7,6 +7,8 @@
         "redstone",
         "fs",
         "shell",
-        "epatLibTurtle"
+        "epatLibTurtle",
+        "rednet",
+        "peripheral"
     ]
 }
