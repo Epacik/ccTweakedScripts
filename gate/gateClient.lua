@@ -54,13 +54,15 @@ local function PrintServers()
 end
 
 
-
+cls();
 print("Co chcesz zrobic?")
 print("1. Wybierz serwer")
 print("2. Dodaj serwer")
 print("3. Edytuj serwer")
 local input = read();
+cls();
 if input == "1" then
+    
     PrintServers();
 
     print("Podaj ID serwera");
@@ -76,9 +78,9 @@ if input == "1" then
 
     cls();
 
-    print("Chcesz otworzyc czy zamknąć brame?")
+    print("Chcesz otworzyc czy zamknac brame?")
     print("1. Otworzyc");
-    print("2. Zamknąc");
+    print("2. Zamknac");
     local task = read();
     if task == "1" then
         task = "open";
@@ -97,9 +99,13 @@ if input == "1" then
 elseif input == "2" then
     print("Podaj ID serwera");
     local id = read();
+
+    cls();
+
     print("Podaj opis serwera (dla ulatwienia identyfikacji)");
     local desc = read();
 
+    cls();
 
     settings.load("/etc/gateCli.conf");
     local servers = settings.get("servers");
@@ -124,8 +130,12 @@ elseif input == "3" then
     PrintServers();
     print("Podaj ID serwera");
     local id = read();
+    cls();
+
     print("Podaj nowy opis serwera (pozostawienie pustego anuluje zmiane)");
     local desc = read();
+    cls();
+    
     if desc ~= "" then
         settings.load("/etc/gateCli.conf");
         local servers = settings.get("servers");
