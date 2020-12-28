@@ -8,7 +8,7 @@ end
 
 local function ConnectToNetwork()
 
-    print("Enabling modem");
+    --print("Enabling modem");
     local sides = {"top", "bottom", "front", "back", "left", "right" }
 
 
@@ -23,7 +23,7 @@ end
 
 local function DisconnectFromNetwork()
 
-    print("Enabling modem");
+    --print("Enabling modem");
     local sides = {"top", "bottom", "front", "back", "left", "right" }
 
 

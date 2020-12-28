@@ -104,6 +104,6 @@ name = epat-gate-client
 	category = gate automation
 	dependencies = epat/stringLib epat/sha1
 	target = /usr/bin
-	version = 0.3
-	size = 2673
+	version = 0.4
+	size = 2674
 end
