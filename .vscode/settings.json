@@ -11,6 +11,7 @@
         "rednet",
         "peripheral",
         "read",
-        "settings"
+        "settings",
+        "term"
     ]
 }

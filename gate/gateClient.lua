@@ -1,6 +1,11 @@
 os.loadAPI("/usr/apis/stringLib");
 os.loadAPI("/usr/apis/sha1");
 
+local function cls()
+    term.clear()
+    term.setCursorPos(1,1)
+end
+
 local function ConnectToNetwork()
 
     print("Enabling modem");
@@ -9,7 +14,7 @@ local function ConnectToNetwork()
 
     for i = 1, 6, 1 do
         if peripheral.isPresent(sides[i]) and peripheral.getType(sides[i]) == "modem" then
-            print(sides[i]);
+            --print(sides[i]);
             rednet.open(sides[i]);
             return
         end
@@ -24,7 +29,7 @@ local function DisconnectFromNetwork()
 
     for i = 1, 6, 1 do
         if peripheral.isPresent(sides[i]) and peripheral.getType(sides[i]) == "modem" then
-            print(sides[i]);
+            --print(sides[i]);
             rednet.close(sides[i]);
             return
         end
@@ -50,7 +55,7 @@ end
 
 
 
-print("Co chcesz zrobić?")
+print("Co chcesz zrobic?")
 print("1. Wybierz serwer")
 print("2. Dodaj serwer")
 print("3. Edytuj serwer")
@@ -61,15 +66,19 @@ if input == "1" then
     print("Podaj ID serwera");
     local id = read();
 
-    print("Podaj hasło serwera (jeśli jest wymagane)");
+    cls();
+
+    print("Podaj haslo serwera (jesli jest wymagane)");
     local pass = read("*");
     if pass == "" then
         pass = "none";
     end
 
-    print("Chcesz otworzyć czy zamknąć bramę?")
-    print("1. Otworzyć");
-    print("2. Zamknąć");
+    cls();
+
+    print("Chcesz otworzyc czy zamknąć brame?")
+    print("1. Otworzyc");
+    print("2. Zamknąc");
     local task = read();
     if task == "1" then
         task = "open";
@@ -88,7 +97,7 @@ if input == "1" then
 elseif input == "2" then
     print("Podaj ID serwera");
     local id = read();
-    print("Podaj opis serwera (dla ułatwienia identyfikacji)");
+    print("Podaj opis serwera (dla ulatwienia identyfikacji)");
     local desc = read();
 
 
@@ -115,20 +124,21 @@ elseif input == "3" then
     PrintServers();
     print("Podaj ID serwera");
     local id = read();
-    print("Podaj nowy opis serwera (pozostawienie pustego anuluje zmianę)");
+    print("Podaj nowy opis serwera (pozostawienie pustego anuluje zmiane)");
     local desc = read();
     if desc ~= "" then
         settings.load("/etc/gateCli.conf");
         local servers = settings.get("servers");
-        if servers == nil then servers = {} end
+        if servers == nil then servers = {}; end
 
         local index = 1;
         while true do
             local srv = servers[index];
             if(srv == nil) then
                 break;
-            elseif srv:startsWidth(tostring(id)) then
+            elseif string.sub(srv,1,string.len(id)) == id then
                 servers[index] = tostring(id) .. ". " .. desc;
+                break;
             end
 
             index = index + 1;
