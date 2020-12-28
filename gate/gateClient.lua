@@ -34,6 +34,7 @@ end
 local function PrintServers()
     settings.load("/etc/gateCli.conf");
     local servers = settings.get("servers");
+    if servers == nil then servers = {} end
     local index = 1;
     while true do
         local srv = servers[index];
@@ -93,6 +94,8 @@ elseif input == "2" then
 
     settings.load("/etc/gateCli.conf");
     local servers = settings.get("servers");
+    if servers == nil then servers = {} end
+
     local index = 1;
     while true do
         local srv = servers[index];
@@ -117,6 +120,8 @@ elseif input == "3" then
     if desc ~= "" then
         settings.load("/etc/gateCli.conf");
         local servers = settings.get("servers");
+        if servers == nil then servers = {} end
+
         local index = 1;
         while true do
             local srv = servers[index];
