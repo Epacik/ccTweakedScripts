@@ -25,7 +25,19 @@ local function LeaveSeeds()
             turtle.dropUp();
         end
     end
-    while turtle.down() do end
+    while turtle.down() do
+        local x, y = turtle.inspectDown()
+        if x and y.name == "minecraft:lava" then 
+            break;
+        end
+    end
+    for i = 1, 16, 1 do
+        turtle.select(i);
+        local item = turtle.getItemDetail();
+        if(item ~= nil and item["name"] == "minecraft:wheat_seeds") then
+            turtle.dropDown();
+        end
+    end
 end
 
 local function leaveRestOfItems()
@@ -53,6 +65,7 @@ trt.SetMainLoopCallback(function ()
     timer(60);
     Collect();
     LeaveSeeds();
+
     leaveRestOfItems();
 end)
 
@@ -64,7 +77,7 @@ local function AmImLost()
 
     exists, item = turtle.inspectDown();
 
-    if(exists and item.name == "minecraft:dirt") then
+    if(exists and item.name == "minecraft:lava") then
         return
     elseif (exists) then
         while turtle.back() do end

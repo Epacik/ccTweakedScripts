@@ -49,8 +49,8 @@ name = epat-farm-collector
 	category = turtle farming
 	dependencies = epat/epatLib-turtle
 	target = /usr/bin
-	version = 0.6
-	size = 2673
+	version = 0.7
+	size = 2677
 end
 
 name = epat-farm-planter
