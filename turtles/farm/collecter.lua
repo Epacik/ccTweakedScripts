@@ -56,7 +56,12 @@ local function leaveRestOfItems()
     end
 
     --go back
-    while turtle.down() do end
+    while turtle.down() do
+        local x, y = turtle.inspectDown()
+        if x and y.name == "minecraft:lava" then 
+            break;
+        end
+     end
     while turtle.back() do end
     turtle.turnLeft();
 end
@@ -72,7 +77,12 @@ end)
 local function AmImLost()
     local exists, item = turtle.inspectDown();
     if (not exists) then
-        while turtle.down() do end
+        while turtle.down() do
+            local x, y = turtle.inspectDown()
+            if x and y.name == "minecraft:lava" then 
+                break;
+            end
+        end
     end
 
     exists, item = turtle.inspectDown();
