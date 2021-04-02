@@ -34,10 +34,10 @@ local function DigRow()
 
     for i = 1, left, 1 do
         while turtle.dig() do end
-        turtle.forward();
+        if i + 1 < left then turtle.forward(); end
     end
 
-    for i = 1, left, 1 do
+    for i = 1, left - 1, 1 do
         turtle.back()
     end
     
@@ -47,10 +47,11 @@ local function DigRow()
 
     for i = 1, right, 1 do
         while turtle.dig() do end
-        turtle.forward();
+        if i + 1 < right then turtle.forward(); end
+        
     end
 
-    for i = 1, right, 1 do
+    for i = 1, right - 1, 1 do
         turtle.back()
     end
 
