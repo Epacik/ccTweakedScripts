@@ -71,8 +71,8 @@ name = epat-custom-tunnel
 	category = turtle mining
 	dependencies = epat/epatLib-turtle
 	target = /usr/bin
-	version = 1.4
-	size = 2184
+	version = 1.5
+	size = 2185
 end
 
 name = epat-bread-crafter
