@@ -11,49 +11,58 @@ local width = tonumber(args[1]);
 local height = tonumber(args[2]);
 local depth = tonumber(args[3]);
 
+local function goLeft(num)
+
+    turtle.turnLeft();
+
+    for i = 1, num, 1 do
+        print(i)
+        while turtle.dig() do end
+        if i + 1 < num - 1 then turtle.forward(); end
+    end
+
+    for i = 1, num - 1, 1 do
+        turtle.back()
+    end
+
+end
+
+local function goRight(num)
+    for i = 1, num, 1 do
+        print(i)
+        while turtle.dig() do end
+        if i + 1 < num - 1 then turtle.forward(); end
+        
+    end
+
+    for i = 1, num - 1, 1 do
+        turtle.back()
+    end
+
+end
+
 local function DigRow()
     local left = 0;
     local right = 0;
     if width > 1 then
+        left = (width - 1) / 2;
+        right = (width - 1) / 2;
+
         if math.fmod(width, 2) == 0 then
             -- divisible by 2
-            left = width / 2;
             right = (width / 2) - 1;
-        else
-            -- not divisible by 2
-            left = (width - 1) / 2;
-            right = (width - 1) / 2;
         end
     else 
         return
     end
 
 
-    -- for now width is always 3
-    turtle.turnLeft();
-
-    for i = 1, left, 1 do
-        while turtle.dig() do end
-        if i + 1 < left - 1 then turtle.forward(); end
-    end
-
-    for i = 1, left - 1, 1 do
-        turtle.back()
-    end
-    
+    goLeft(left);
 
     turtle.turnRight();
     turtle.turnRight();
 
-    for i = 1, right, 1 do
-        while turtle.dig() do end
-        if i + 1 < right - 1 then turtle.forward(); end
-        
-    end
-
-    for i = 1, right - 1, 1 do
-        turtle.back()
-    end
+    goRight(right);
 
     turtle.turnLeft();
     
