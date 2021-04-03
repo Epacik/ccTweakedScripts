@@ -32,7 +32,7 @@ local function DigRow()
     -- for now width is always 3
     turtle.turnLeft();
 
-    for i = 1, left, 1 do
+    for i = 1, left - 1, 1 do
         while turtle.dig() do end
         if i + 1 < left then turtle.forward(); end
     end
@@ -45,7 +45,7 @@ local function DigRow()
     turtle.turnRight();
     turtle.turnRight();
 
-    for i = 1, right, 1 do
+    for i = 1, right - 1, 1 do
         while turtle.dig() do end
         if i + 1 < right then turtle.forward(); end
         
@@ -103,6 +103,9 @@ if(args[1] == "--help" or width == nil or width == 0 or height == nil or height 
         print(shell.getRunningProgram() .. " <width:number> <height:number> <depth:number>")
         print(shell.getRunningProgram() .. " <width:number> <height:number> <depth:number> --placeBlocks")
 else
+    turtle.dig();
+    turtle.forward();
+
     trt.SetMainLoopCallback(function ()
         Main();
     end);
