@@ -56,6 +56,7 @@ local function DigRow()
             -- not divisible by 2
             left = (width - 1) / 2;
             right = (width - 1) / 2;
+        end
     else 
         return
     end
