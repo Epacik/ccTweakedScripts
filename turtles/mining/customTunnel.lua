@@ -103,7 +103,7 @@ if(args[1] == "--help" or width == nil or width == 0 or height == nil or height 
         print(shell.getRunningProgram() .. " <width:number> <height:number> <depth:number>")
         print(shell.getRunningProgram() .. " <width:number> <height:number> <depth:number> --placeBlocks")
 else
-    turtle.dig();
+    while turtle.dig() do end
     turtle.forward();
 
     trt.SetMainLoopCallback(function ()
