@@ -44,24 +44,35 @@ end
 local function DigRow()
     local left = 0;
     local right = 0;
-    if width > 1 then
-        left = (width - 1) / 2;
-        right = (width - 1) / 2;
 
+    print("Row width");
+    print(width);
+    if width > 1 then
         if math.fmod(width, 2) == 0 then
             -- divisible by 2
+            left = width / 2;
             right = (width / 2) - 1;
-        end
+        else
+            -- not divisible by 2
+            left = (width - 1) / 2;
+            right = (width - 1) / 2;
     else 
         return
     end
 
+    print("steps left");
+    print(left);
 
+    print("steps right");
+    print(right)
+
+    print("goint left")
     goLeft(left);
 
     turtle.turnRight();
     turtle.turnRight();
 
+    print("goint right")
     goRight(right);
 
     turtle.turnLeft();
