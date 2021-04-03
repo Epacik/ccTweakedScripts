@@ -32,9 +32,9 @@ local function DigRow()
     -- for now width is always 3
     turtle.turnLeft();
 
-    for i = 1, left - 1, 1 do
+    for i = 1, left, 1 do
         while turtle.dig() do end
-        if i + 1 < left then turtle.forward(); end
+        if i + 1 < left - 1 then turtle.forward(); end
     end
 
     for i = 1, left - 1, 1 do
@@ -45,9 +45,9 @@ local function DigRow()
     turtle.turnRight();
     turtle.turnRight();
 
-    for i = 1, right - 1, 1 do
+    for i = 1, right, 1 do
         while turtle.dig() do end
-        if i + 1 < right then turtle.forward(); end
+        if i + 1 < right - 1 then turtle.forward(); end
         
     end
 
