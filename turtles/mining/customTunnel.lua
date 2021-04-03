@@ -18,7 +18,8 @@ local function goLeft(num)
     for i = 1, num, 1 do
         print(i)
         while turtle.dig() do end
-        if i + 1 < num then turtle.forward(); end
+
+        if i < num then turtle.forward(); end
     end
 
     for i = 1, num - 1, 1 do
@@ -31,7 +32,7 @@ local function goRight(num)
     for i = 1, num, 1 do
         print(i)
         while turtle.dig() do end
-        if i + 1 < num then turtle.forward(); end
+        if i < num then turtle.forward(); end
         
     end
 
