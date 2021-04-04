@@ -344,14 +344,14 @@ local function LoadCfg()
     if fs.exists("/cfg/planter.cfg") then
         settings.load("/cfg/planter.cfg");
 
-        Crop = settings.set(names.crop, Crop);
-        Seeds = settings.set(names.seeds, Seeds);
-        EndBlockName = settings.set(names.endBlock, EndBlockName);
-        StartBlock = settings.set(names.startBlock, StartBlock);
-        GrowthBoundary = settings.set(names.growthBoundary, GrowthBoundary);
-        EndWall = settings.set(names.endWall, EndWall);
-        SideWall = settings.set(names.sideWall, SideWall);
-        CannotPlantBlockName = settings.set(names.cantPlant, CannotPlantBlockName);
+        Crop = settings.get(names.crop, Crop);
+        Seeds = settings.get(names.seeds, Seeds);
+        EndBlockName = settings.get(names.endBlock, EndBlockName);
+        StartBlock = settings.get(names.startBlock, StartBlock);
+        GrowthBoundary = settings.get(names.growthBoundary, GrowthBoundary);
+        EndWall = settings.get(names.endWall, EndWall);
+        SideWall = settings.get(names.sideWall, SideWall);
+        CannotPlantBlockName = settings.get(names.cantPlant, CannotPlantBlockName);
         print("cfg")
 
         print(names.crop)
