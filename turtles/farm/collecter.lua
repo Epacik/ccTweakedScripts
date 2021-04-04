@@ -132,9 +132,19 @@ local function AmImLost()
     elseif (exists) then
         while turtle.back() do end
     end
-    turtle.turnLeft();
+    if side == "right" then
+        turtle.turnLeft();
+    else
+        turtle.turnRight()
+    end
     exists, item = turtle.inspect();
-    if(exists) then turtle.turnRight(); end
+    if(exists) then 
+        if side == "right" then
+            turtle.turnRight();
+        else
+            turtle.turnLeft()
+        end
+    end
 end
 
 AmImLost()
