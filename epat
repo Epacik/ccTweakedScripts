@@ -60,8 +60,8 @@ name = epat-farm-planter
 	category = turtle farming
 	dependencies = epat/epatLib-turtle
 	target = /usr/bin
-	version = 0.7
-	size = 2677
+	version = 0.8
+	size = 2678
 end
 
 name = epat-custom-tunnel

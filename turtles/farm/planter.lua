@@ -352,6 +352,31 @@ local function LoadCfg()
         EndWall = settings.set(names.endWall, EndWall);
         SideWall = settings.set(names.sideWall, SideWall);
         CannotPlantBlockName = settings.set(names.cantPlant, CannotPlantBlockName);
+        print("cfg")
+
+        print(names.crop)
+        print(Crop)
+
+        print(names.seeds)
+        print(Seeds)
+
+        print(names.endBlock)
+        print(EndBlockName)
+
+        print(names.startBlock)
+        print(StartBlock)
+
+        print(names.growthBoundary)
+        print(GrowthBoundary)
+
+        print(names.endWall)
+        print(EndWall)
+
+        print(names.sideWall)
+        print(SideWall)
+
+        print(names.cantPlant)
+        print(CannotPlantBlockName)
 
         settings.save("/cfg/planter.cfg");
 
