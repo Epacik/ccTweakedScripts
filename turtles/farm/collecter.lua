@@ -1,5 +1,7 @@
 os.loadAPI("/usr/apis/epatLibTurtle")
 local trt = epatLibTurtle
+local Seeds = "minecraft:wheat_seeds"
+local side = "right"
 
 local function timer(sec)
     _G.sleep(sec)
@@ -21,7 +23,7 @@ local function LeaveSeeds()
     for i = 1, 16, 1 do
         turtle.select(i);
         local item = turtle.getItemDetail();
-        if(item ~= nil and item["name"] == "minecraft:wheat_seeds") then
+        if(item ~= nil and item["name"] == Seeds) then
             turtle.dropUp();
         end
     end
@@ -34,7 +36,7 @@ local function LeaveSeeds()
     for i = 1, 16, 1 do
         turtle.select(i);
         local item = turtle.getItemDetail();
-        if(item ~= nil and item["name"] == "minecraft:wheat_seeds") then
+        if(item ~= nil and item["name"] == Seeds) then
             turtle.dropDown();
         end
     end
@@ -42,7 +44,12 @@ end
 
 local function leaveRestOfItems()
     --go to chest
-    turtle.turnRight();
+    if side == "right" then
+        turtle.turnRight();
+    else
+        turtle.turnLeft()
+    end
+
     while turtle.forward() do end
     while turtle.up() do end
 
@@ -63,8 +70,41 @@ local function leaveRestOfItems()
         end
      end
     while turtle.back() do end
-    turtle.turnLeft();
+    if side == "right" then
+        turtle.turnLeft();
+    else
+        turtle.turnRight()
+    end
 end
+
+
+local function LoadCfg()
+    local names = { 
+        side = "side"; 
+        seeds = "seeds";
+    }
+    
+    if fs.exists("/cfg/collecter.cfg") then
+        settings.load("/cfg/collecter.cfg");
+
+        side = settings.set(names.side, side);
+        Seeds = settings.set(names.seeds, Seeds);
+
+        settings.save("/cfg/collecter.cfg");
+
+    else
+        fs.makeDir("/cfg");
+
+        settings.set(names.side, side);
+        settings.set(names.seeds, Seeds);
+
+        settings.save("/cfg/collecter.cfg");
+
+    end
+
+end
+
+LoadCfg()
 
 trt.SetMainLoopCallback(function ()
     timer(60);

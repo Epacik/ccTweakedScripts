@@ -373,6 +373,7 @@ local function LoadCfg()
 
 end
 
+LoadCfg();
 
 trt.SetMainLoopCallback(function ()
     Main()
