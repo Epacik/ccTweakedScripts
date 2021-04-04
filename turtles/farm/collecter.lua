@@ -87,8 +87,8 @@ local function LoadCfg()
     if fs.exists("/cfg/collecter.cfg") then
         settings.load("/cfg/collecter.cfg");
 
-        side = settings.set(names.side, side);
-        Seeds = settings.set(names.seeds, Seeds);
+        side = settings.get(names.side, side);
+        Seeds = settings.get(names.seeds, Seeds);
 
         settings.save("/cfg/collecter.cfg");
 
