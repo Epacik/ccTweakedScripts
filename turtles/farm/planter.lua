@@ -159,6 +159,8 @@ end
 
 
 local function HomingSequence()
+    print("task")
+    print(Task)
     while turtle.forward() do
     end
 
@@ -304,7 +306,10 @@ local function Main()
 
     Task = Tasks.Checking;
     HomingSequence();
-    if CalculateGrowth() > GrowthBoundary then
+    local growth = CalculateGrowth()
+    print("growth")
+    print(growth)
+    if growth > GrowthBoundary then
         redstone.setOutput("top", true);
         timer(5)
         redstone.setOutput("top", false);
