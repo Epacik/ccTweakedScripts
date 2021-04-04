@@ -329,7 +329,7 @@ local function Main()
     timer(60)
 end
 
-local LoadCfg()
+local function LoadCfg()
     local names = { 
         crop = "crop"; 
         seeds = "seeds"; 
