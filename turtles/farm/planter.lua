@@ -4,6 +4,11 @@ local trt = epatLibTurtle
 local EndBlockName = "minecraft:smooth_stone"
 local CannotPlantBlockName = "minecraft:cobblestone"
 local StartBlock = "mekanism:block_osmium"
+local Seeds = "minecraft:wheat_seeds"
+local Crop = "minecraft:wheat"
+local SideWall = "minecraft:cobblestone"
+local EndWall = "minecraft:stone"
+local GrowthBoundary = 6.95
 
 local Tasks = {
     Checking = 1,
@@ -13,7 +18,7 @@ local Tasks = {
 local Task = Tasks.Planting;
 
 local function timer(sec)
-_G.sleep(sec)
+    _G.sleep(sec)
 end
 
 
@@ -33,11 +38,11 @@ end
 local function Plant()
     local item = turtle.getItemDetail();
 
-    if (item == nil or item["name"] ~= "minecraft:wheat_seeds") then
+    if (item == nil or item["name"] ~= Seeds) then
         for i = 1, 16, 1 do
             turtle.select(i);
             item = turtle.getItemDetail();
-            if(item ~= nil and item["name"] == "minecraft:wheat_seeds") then
+            if(item ~= nil and item["name"] == Seeds) then
                 break;
             end
         end
@@ -53,7 +58,7 @@ local States = {}
 
 local function Check()
     local x, item = turtle.inspectDown();
-    if(x and item.name == "minecraft:wheat") then
+    if(x and item.name == Crop) then
         StatesAmount = StatesAmount + 1;
         States[StatesAmount] = item.state.age;
     end
@@ -246,10 +251,10 @@ local function AmILost()
             if turtle.inspectUp() and  turtle.inspect() then
                 local x, y = turtle.inspect();
                 local x1, y1 = turtle.inspectUp();
-                if x and (y.name == "minecraft:piston_head" or  y.name == "minecraft:diorite") then
+                if x and (y.name == "minecraft:piston_head" or  y.name == SideWall) then
                     goBack1 = true;
                     break
-                elseif x and y.name == "minecraft:stone" then
+                elseif x and y.name == EndWall then
                     goBack2 = true;
                     break;
                 elseif x1 and y1.name == StartBlock then
@@ -299,7 +304,7 @@ local function Main()
 
     Task = Tasks.Checking;
     HomingSequence();
-    if CalculateGrowth() > 6.95 then
+    if CalculateGrowth() > GrowthBoundary then
         redstone.setOutput("top", true);
         timer(5)
         redstone.setOutput("top", false);
@@ -308,7 +313,7 @@ local function Main()
         for i = 1, 16, 1 do
             turtle.select(i);
             local item = turtle.getItemDetail();
-            if(item ~= nil and item["name"] == "minecraft:wheat_seeds") then
+            if(item ~= nil and item["name"] == Seeds) then
                 stacksInInv = stacksInInv + 1;
             end
         end
@@ -323,6 +328,51 @@ local function Main()
     end
     timer(60)
 end
+
+local LoadCfg()
+    local names = { 
+        crop = "crop"; 
+        seeds = "seeds"; 
+        endBlock = "endBlock";
+        startBlock = "startBlock";
+        growthBoundary = "growthBoundary";
+        endWall = "endWall";
+        sideWall = "sideWall";
+        cantPlant = "cantPlant";
+    }
+    
+    if fs.exists("/cfg/planter.cfg") then
+        settings.load("/cfg/planter.cfg");
+
+        Crop = settings.set(names.crop, Crop);
+        Seeds = settings.set(names.seeds, Seeds);
+        EndBlockName = settings.set(names.endBlock, EndBlockName);
+        StartBlock = settings.set(names.startBlock, StartBlock);
+        GrowthBoundary = settings.set(names.growthBoundary, GrowthBoundary);
+        EndWall = settings.set(names.endWall, EndWall);
+        SideWall = settings.set(names.sideWall, SideWall);
+        CannotPlantBlockName = settings.set(names.cantPlant, CannotPlantBlockName);
+
+        settings.save("/cfg/planter.cfg");
+
+    else
+        fs.makeDir("/cfg");
+
+        settings.set(names.crop, Crop);
+        settings.set(names.seeds, Seeds);
+        settings.set(names.endBlock, EndBlockName);
+        settings.set(names.startBlock, StartBlock);
+        settings.set(names.growthBoundary, GrowthBoundary);
+        settings.set(names.endWall, EndWall);
+        settings.set(names.sideWall, SideWall);
+        settings.set(names.cantPlant, CannotPlantBlockName);
+
+        settings.save("/cfg/planter.cfg");
+
+    end
+
+end
+
 
 trt.SetMainLoopCallback(function ()
     Main()
